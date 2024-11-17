@@ -143,9 +143,6 @@
   .flex-center {
     @apply flex items-center justify-center;
   }
-  .center{
-    @apply flex h-screen items-center justify-center bg-amber-100;
-  }
 
   /* =====  SHADCN OVERRIDES */
   .shad-no-focus {
