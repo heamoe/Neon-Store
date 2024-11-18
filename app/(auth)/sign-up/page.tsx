@@ -1,6 +1,5 @@
 import React from "react";
+import Authform from "@/component/Authform";
 
-const SignUp = () => {
-  return <div>Sign Up</div>;
-};
+const SignUp = () => <Authform type="sign-up" />;
 export default SignUp;
