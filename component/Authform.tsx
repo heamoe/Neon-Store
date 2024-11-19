@@ -1,5 +1,5 @@
 type FormType = "login" | "signup";
 const Authform = ({ type }: { type: FormType }) => {
-  return <div>Authform</div>;
+  return <div></div>;
 };
 export default Authform;
