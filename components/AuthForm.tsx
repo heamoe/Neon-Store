@@ -105,7 +105,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           {errorMessage && <p className="error-message">*{errorMessage}</p>}
         </form>
       </Form>
-      {/* OPT Verification */}
+      {/* TODO Add OPT Verification */}
     </>
   );
 };
