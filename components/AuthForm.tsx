@@ -20,8 +20,6 @@ type FormType = "sign-in" | "sign-up";
 const authFormSchema = (formType: FormType) => {
   return z.object({
     email: z.string().email(),
-    // password: z.string().min(8).max(50),
-    // confirmPassword: z.string().min(8).max(50),
     fullName:
       formType === "sign-up"
         ? z.string().min(2).max(50)
