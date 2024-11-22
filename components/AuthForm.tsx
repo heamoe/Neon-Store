@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,19 +16,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import Link from "next/link";
-
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-});
-
 type FormType = "sign-in" | "sign-up";
+const authFormSchema = (formType: FormType) => {
+  return z.object({
+    email: z.string().email(),
+    // password: z.string().min(8).max(50),
+    // confirmPassword: z.string().min(8).max(50),
+    fullName:
+      formType === "sign-up"
+        ? z.string().min(2).max(50)
+        : z.string().optional(),
+  });
+};
 const AuthForm = ({ type }: { type: FormType }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      fullName: "",
+      email: "",
     },
   });
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
