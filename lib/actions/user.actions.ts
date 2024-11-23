@@ -10,7 +10,7 @@ const getUsersByEmail = async (email: string) => {
   const result = await database.listDocuments(
     appwriteConfig.databaseId,
     appwriteConfig.usersCollectionId,
-    [Query.equal("email", email)],
+    [Query.equal("email", [email])],
   );
   return result.total > 0 ? result.documents[0] : null;
 };
@@ -29,7 +29,7 @@ export const sendEmailOTP = async ({ email }: { email: string }) => {
     handleError(error, "Failed to send email OTP");
   }
 };
-export const creatAccount = async ({
+export const createAccount = async ({
   fullName,
   email,
 }: {
