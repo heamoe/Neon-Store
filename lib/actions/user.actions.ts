@@ -29,7 +29,7 @@ export const sendEmailOTP = async ({ email }: { email: string }) => {
     handleError(error, "Failed to send email OTP");
   }
 };
-const creatAccount = async ({
+export const creatAccount = async ({
   fullName,
   email,
 }: {
