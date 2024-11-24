@@ -26,6 +26,7 @@ export const createSessionClient = async () => {
 };
 
 export const createAdminClient = async () => {
+  console.log("Creating new admin client");
   const client = new Client()
     .setEndpoint(appwriteConfig.endpointUrl)
     .setProject(appwriteConfig.projectId)

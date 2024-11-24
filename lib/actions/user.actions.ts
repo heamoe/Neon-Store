@@ -6,6 +6,7 @@ import { avatarPlaceholderUrl } from "@/constants";
 import { parseStringify } from "@/lib/utils";
 
 const getUserByEmail = async (email: string) => {
+  console.log("getUserByEmail", email);
   const { databases } = await createAdminClient();
 
   const result = await databases.listDocuments(
