@@ -49,7 +49,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
         fullName: values.fullName || "",
         email: values.email,
       });
-      setAccountId(user.accountId);
+      console.log("user:" + user);
+      console.log("user (stringified):", JSON.stringify(user, null, 2));
     } catch (error) {
       setErrorMessage(
         error.message +
