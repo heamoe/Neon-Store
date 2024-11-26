@@ -16,6 +16,7 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import Image from "next/image";
 
 const OtpModal = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -37,11 +38,20 @@ const OtpModal = () => {
   };
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger>Open</AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+      <AlertDialogContent className="shad-alert-dialog">
+        <AlertDialogHeader className="relative flex justify-center">
+          <AlertDialogTitle className="h2 text-center">
+            Enter OTP to verify
+            <Image
+              src="/assets/icons/close-dark.svg"
+              alt="Close"
+              width={20}
+              height={20}
+              onClick={() => setIsOpen(false)}
+              className="otp-close-button"
+            />
+          </AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete your
             account and remove your data from our servers.
