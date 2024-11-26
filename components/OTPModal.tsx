@@ -18,7 +18,13 @@ import {
 } from "@/components/ui/input-otp";
 import Image from "next/image";
 
-const OtpModal = () => {
+const OtpModal = ({
+  accountId,
+  email,
+}: {
+  accountId: string;
+  email: string;
+}) => {
   const [isOpen, setIsOpen] = useState(true);
   const [password, setPassword] = useState("");
   const [isloading, setIsloading] = useState(false);
@@ -52,9 +58,9 @@ const OtpModal = () => {
               className="otp-close-button"
             />
           </AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+          <AlertDialogDescription className="subtitle-2 text-center text-light-100">
+            We&apos;ve sent a code to{" "}
+            <span className="pl-1 text-brand">{email}</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <InputOTP maxLength={6}>
