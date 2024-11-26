@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,6 +18,24 @@ import {
 } from "@/components/ui/input-otp";
 
 const OtpModal = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [password, setPassword] = useState("");
+  const [isloading, setIsloading] = useState(false);
+  const handleResentOTP = async () => {
+    // call API to resend OTP
+  };
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsloading(true);
+    try {
+      // call API to verify OTP
+    } catch (error) {
+      console.log("error happened in OTPModal: ", error);
+    } finally {
+      setIsloading(false);
+    }
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger>Open</AlertDialogTrigger>
