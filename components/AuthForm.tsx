@@ -45,11 +45,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
     setIsLoading(true);
     setErrorMessage("");
     try {
-      console.log(values);
+      console.log("receiving values:" + values);
       const user = await createAccount({
         fullName: values.fullName || "",
         email: values.email,
       });
+      setAccountId(user.accountId);
       console.log("user:" + user);
       console.log("user (stringified):", JSON.stringify(user, null, 2));
     } catch (error) {
@@ -146,7 +147,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           </div>
         </form>
       </Form>
-      {true && (
+      {accountId && (
         <OTPModal email={form.getValues("email")} accountId={accountId} />
       )}
     </>
