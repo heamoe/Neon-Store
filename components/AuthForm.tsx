@@ -45,7 +45,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
     setIsLoading(true);
     setErrorMessage("");
     try {
-      console.log("receiving values from :" + values);
+      console.log("receiving values from:" + values);
       const user = await createAccount({
         fullName: values.fullName || "",
         email: values.email,
