@@ -1,12 +1,14 @@
 import React from 'react'
 import Image from "next/image";
+import Search from "@/components/Search";
+import FileUploader from "@/components/FileUploader";
 
 const Header = () => {
     return (
         <header className="header">
-            Search
+            <Search />
             <div className="header-wrapper">
-                FileUploader
+                <FileUploader />
                 <form>
                     <button type="submit" className="sign-out-button">
                         <Image src="/assets/icons/logout.svg" alt="sign out" width={24} height={24} className="w-7" />
