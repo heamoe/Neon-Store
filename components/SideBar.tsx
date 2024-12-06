@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {navItems} from "@/constants";
-import {usePathname} from "next/navigation";
-import {cn} from "@/lib/utils";
+import { navItems } from "@/constants";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 interface Props {
     fullName: string;
@@ -12,7 +12,7 @@ interface Props {
     email: string;
 }
 
-const Sidebar = ({fullName, avatar, email}: Props) => {
+const Sidebar = ({ fullName, avatar, email }: Props) => {
     const pathname = usePathname();
 
     return (
@@ -37,7 +37,7 @@ const Sidebar = ({fullName, avatar, email}: Props) => {
 
             <nav className="sidebar-nav">
                 <ul className="flex flex-1 flex-col gap-6">
-                    {navItems.map(({url, name, icon}) => (
+                    {navItems.map(({ url, name, icon }) => (
                         <Link key={name} href={url} className="lg:w-full">
                             <li
                                 className={cn(
