@@ -16,7 +16,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <div className="space-y-5 text-white">
             <h1 className="h1">Mange Your Files The Best Way</h1>
             <p className="body-1">
-              This is a place for your files to be organized and managed the
+              This is a place for your files to be organized
             </p>
             <Image
               src="/assets/images/files.png"
