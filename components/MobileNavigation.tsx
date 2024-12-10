@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -8,12 +8,21 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { set } from "zod";
 
 const MobileNavigation = () => {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   return (
-    <header>
-      <Image src="/logo.svg" alt="logo" width={100} height={100} />
-      <Sheet>
+    <header className="mobile-header">
+      <Image
+        src="/assets/icons/logo-full-brand.svg"
+        alt="logo"
+        width={120}
+        height={52}
+      />
+      <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger>Open</SheetTrigger>
         <SheetContent>
           <SheetHeader>
