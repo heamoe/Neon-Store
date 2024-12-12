@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import Link from "next/link";
-import { createAccount } from "@/lib/actions/user.actions";
+import { createAccount, signInUser } from "@/lib/actions/user.actions";
 import OTPModal from "@/components/OTPModal";
 type FormType = "sign-in" | "sign-up";
 
@@ -46,10 +46,13 @@ const AuthForm = ({ type }: { type: FormType }) => {
     setErrorMessage("");
     try {
       console.log("receiving values from :" + values);
-      const user = await createAccount({
-        fullName: values.fullName || "",
-        email: values.email,
-      });
+      const user =
+        type === "sign-up"
+          ? await createAccount({
+              fullName: values.fullName || "",
+              email: values.email,
+            })
+          : await signInUser({ email: values.email });
       setAccountId(user.accountId);
       console.log("user:" + user);
       console.log("user (stringified):", JSON.stringify(user, null, 2));
