@@ -56,10 +56,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
       setAccountId(user.accountId);
       console.log("user:" + user);
       console.log("user (stringified):", JSON.stringify(user, null, 2));
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
       setErrorMessage(
-        error.message +
-          "fail to create account please try again ....from AuthForm.tsx",
+        errorMessage +
+          " - Failed to create account. Please try again."
       );
     } finally {
       setIsLoading(false);
