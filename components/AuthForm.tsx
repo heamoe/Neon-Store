@@ -60,7 +60,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
       setErrorMessage(
         errorMessage +
-          " - Failed to create account....Authform."
+          " - Failed to create account...Authform."
       );
     } finally {
       setIsLoading(false);
