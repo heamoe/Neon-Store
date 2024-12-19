@@ -4,7 +4,6 @@ import { useDropzone } from "react-dropzone";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { cn, convertFileToUrl, getFileType } from "@/lib/utils";
-import { get } from "http";
 import Thumbnail from "./Thumbnail";
 interface Props {
   ownerId: string;
@@ -16,6 +15,13 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
   const onDrop = useCallback(async(acceptedFiles : File[]) => {
     setFiles(acceptedFiles);
   }, []);
+   const handleRemoveFile = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    fileName: string,
+  ) => {
+    e.stopPropagation();
+    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
+  };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <div {...getRootProps()} className="cursor-pointer">
@@ -35,10 +41,6 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
 
           {files.map((file, index) => {
             const { type, extension } = getFileType(file.name);
-
-            function handleRemoveFile(e: React.MouseEvent<HTMLImageElement, MouseEvent>, name: string): void {
-              throw new Error("Function not implemented.");
-            }
 
             return (
               <li
