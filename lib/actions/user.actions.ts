@@ -113,7 +113,7 @@ export const signOutUser = async () => {
     await account.deleteSession("current");
     (await cookies()).delete("appwrite-session");
   } catch (error) {
-    handleError(error, "Failed to sign out user");
+    handleError(error, "Failed to sign out user.");
   } finally {
     redirect("/sign-in");
   }
