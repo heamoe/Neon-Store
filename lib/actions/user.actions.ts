@@ -130,6 +130,6 @@ export const signInUser = async ({ email }: { email: string }) => {
 
     return parseStringify({ accountId: null, error: "User not found" });
   } catch (error) {
-    handleError(error, "Failed to sign in user");
+    handleError(error, "Failed to sign in user.");
   }
 };
