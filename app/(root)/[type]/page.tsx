@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const page = async ({ params }: SearchParamProps) => {
   const type = ((await params)?.type as string) || "";
   return <div className="page-container">
