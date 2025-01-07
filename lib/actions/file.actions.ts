@@ -5,6 +5,7 @@ import { appwriteConfig } from "@/lib/appwrite/config";
 import { ID } from "node-appwrite";
 import { constructFileUrl, getFileType, parseStringify } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
+import { getCurrentUser } from "@/lib/actions/user.actions";
 
 const handleError = (error: unknown, message: string) => {
   console.log(error, message);
@@ -25,7 +26,7 @@ export const uploadFile = async ({
     const bucketFile = await storage.createFile(
       appwriteConfig.bucketId,
       ID.unique(),
-      inputFile,
+      inputFile
     );
 
     const fileDocument = {
@@ -45,7 +46,7 @@ export const uploadFile = async ({
         appwriteConfig.databaseId,
         appwriteConfig.filesCollectionId,
         ID.unique(),
-        fileDocument,
+        fileDocument
       )
       .catch(async (error: unknown) => {
         await storage.deleteFile(appwriteConfig.bucketId, bucketFile.$id);
@@ -56,5 +57,15 @@ export const uploadFile = async ({
     return parseStringify(newFile);
   } catch (error) {
     handleError(error, "Failed to upload file");
+  }
+};
+
+export const getFiles = async () => {
+  const { databases } = await createAdminClient();
+  try {
+    const currentUser = await getCurrentUser();
+    if(!currentUser){}
+  } catch (error) {
+    handleError(error, "Failed to get files");
   }
 };
