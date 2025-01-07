@@ -1,8 +1,11 @@
 import Sort from "@/components/Sort";
 import React from "react";
+import { getFiles } from "@/lib/actions/file.actions";
+import { Models } from "node-appwrite";
 
 const page = async ({ params }: SearchParamProps) => {
   const type = ((await params)?.type as string) || "";
+  const files = await getFiles();
   return (
     <div className="page-container">
       <section className="w-full">
@@ -17,6 +20,15 @@ const page = async ({ params }: SearchParamProps) => {
           </div>
         </div>
       </section>
+      {files.total > 0 ? (
+        <section className="file-list">
+          {files.documents.map((file:Models.Document)=>(
+            <h1 key={files.$id} className="h1">{file.$id}</h1>
+          ))}
+        </section>
+      ) : (
+        <p className="empty-list">No file uploaded yet.</p>
+      )}
     </div>
   );
 };
