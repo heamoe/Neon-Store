@@ -1,3 +1,4 @@
+import Sort from "@/components/Sort";
 import React from "react";
 
 const page = async ({ params }: SearchParamProps) => {
@@ -12,6 +13,7 @@ const page = async ({ params }: SearchParamProps) => {
           </p>
           <div className="sort-container">
             <p className="body-1 hidden sm:block text-light-200">Sort By:</p>
+            <Sort />
           </div>
         </div>
       </section>
