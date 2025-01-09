@@ -52,8 +52,12 @@ const ActionDropDown = ({ file }: { file: Models.Document }) => {
                 }
               }}
             >
-              {actionItem.icon === "download" ? (
-                <Link href={constructDownloadUrl(file.bucketfileId)}>
+              {actionItem.value === "download" ? (
+                <Link
+                  href={constructDownloadUrl(file.bucketFileId)}
+                  download={file.name}
+                  className="flex items-center gap-2"
+                >
                   <Image
                     src={actionItem.icon}
                     alt={actionItem.label}
