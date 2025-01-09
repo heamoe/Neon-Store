@@ -13,32 +13,67 @@ import Image from "next/image";
 import { Models } from "node-appwrite";
 import { actionsDropdownItems } from "@/constants";
 import { set } from "zod";
+import Link from "next/link";
+import { constructDownloadUrl } from "@/lib/utils";
 
-const ActionDropDown = ({file}:{file:Models.Document}) => {
+const ActionDropDown = ({ file }: { file: Models.Document }) => {
   const [isModelOpen, setisModelOpen] = useState(false);
   const [isDropDownOpen, setisDropDownOpen] = useState(false);
-  const [action, setAction] = useState<ActionType|null>(null);
+  const [action, setAction] = useState<ActionType | null>(null);
   return (
     <Dialog open={isModelOpen} onOpenChange={() => setisModelOpen}>
       <DropdownMenu open={isDropDownOpen} onOpenChange={setisDropDownOpen}>
         <DropdownMenuTrigger className="shad-no-focus">
-          <Image src="/assets/icons/dots.svg" alt="dots" width={34} height={34}/>
+          <Image
+            src="/assets/icons/dots.svg"
+            alt="dots"
+            width={34}
+            height={34}
+          />
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
-          <DropdownMenuLabel className="max-w-[200px] truncate">{file.name}</DropdownMenuLabel>
+          <DropdownMenuLabel className="max-w-[200px] truncate">
+            {file.name}
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {actionsDropdownItems.map((actionItem)=> (
+          {actionsDropdownItems.map((actionItem) => (
             <DropdownMenuItem
               key={actionItem.value}
               className="shad-dropdown-item"
               onClick={() => {
                 setAction(actionItem);
-                if(['rename','share','delete','details'].includes(actionItem.value)){
+                if (
+                  ["rename", "share", "delete", "details"].includes(
+                    actionItem.value
+                  )
+                ) {
                   setisModelOpen(true);
                 }
               }}
-            ></DropdownMenuItem>
+            >
+              {actionItem.icon === "download" ? (
+                <Link href={constructDownloadUrl(file.bucketfileId)}>
+                  <Image
+                    src={actionItem.icon}
+                    alt={actionItem.label}
+                    width={30}
+                    height={30}
+                  />
+                  {actionItem.label}
+                </Link>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={actionItem.icon}
+                    alt={actionItem.label}
+                    width={30}
+                    height={30}
+                  />
+                  {actionItem.label}
+                </div>
+              )}
+            </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
