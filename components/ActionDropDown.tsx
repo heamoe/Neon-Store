@@ -15,11 +15,15 @@ import { actionsDropdownItems } from "@/constants";
 import { set } from "zod";
 import Link from "next/link";
 import { constructDownloadUrl } from "@/lib/utils";
+import { DialogContent } from "@radix-ui/react-dialog";
 
 const ActionDropDown = ({ file }: { file: Models.Document }) => {
   const [isModelOpen, setisModelOpen] = useState(false);
   const [isDropDownOpen, setisDropDownOpen] = useState(false);
   const [action, setAction] = useState<ActionType | null>(null);
+  const renderDialodContent = () => {
+    return <DialogContent>DIALOG</DialogContent>;
+  };
   return (
     <Dialog open={isModelOpen} onOpenChange={() => setisModelOpen}>
       <DropdownMenu open={isDropDownOpen} onOpenChange={setisDropDownOpen}>
