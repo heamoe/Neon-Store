@@ -22,7 +22,7 @@ const ActionDropDown = ({ file }: { file: Models.Document }) => {
   const [isDropDownOpen, setisDropDownOpen] = useState(false);
   const [action, setAction] = useState<ActionType | null>(null);
   const renderDialodContent = () => {
-    return <DialogContent>DIALOG</DialogContent>;
+    return <DialogContent>Dialog</DialogContent>;
   };
   return (
     <Dialog open={isModelOpen} onOpenChange={() => setisModelOpen}>
