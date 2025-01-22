@@ -4,10 +4,10 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,21 +21,49 @@ import { Models } from "node-appwrite";
 import { actionsDropdownItems } from "@/constants";
 import Link from "next/link";
 import { constructDownloadUrl } from "@/lib/utils";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { set } from "zod";
 
 const ActionDropDown = ({ file }: { file: Models.Document }) => {
   const [isModelOpen, setisModelOpen] = useState(false);
   const [isDropDownOpen, setisDropDownOpen] = useState(false);
   const [action, setAction] = useState<ActionType | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState(file.name);
+  const closeAllModals = () =>{
+    setisModelOpen(false);
+    setisDropDownOpen(false);
+    setAction(null);
+    setName(file.name)
+  }
+  const handleAction = async () => {};
   const renderDialodContent = () => {
+    if (!action) return null;
+    const { value, label } = action;
     return (
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
+      <DialogContent className="shad-dialog button">
+        <DialogHeader className="flex flex-col gap-3">
+          <DialogTitle className="text-center text-light-100">
+            {label}
+          </DialogTitle>
+          {value === "rename" && (
+            <Input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          )}
         </DialogHeader>
+        {["rename", "delete", "share"].includes(value) && (
+          <DialogFooter className=" flex flex-col gap-3 md:flex-row">
+            <Button onClick={closeAllModals} className="modal-cancel-button">cancel</Button>
+            <Button onClick={handleAction} className="modal-submit-button">
+              <p className="captialize">{value}</p>
+              {isLoading && <Image src="/assets/icons/loader.avg" alt="loading" width={24} height={24} className="animate-spin"/>}
+            </Button>
+          </DialogFooter>
+        )}
       </DialogContent>
     );
   };
