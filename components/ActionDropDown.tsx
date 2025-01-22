@@ -1,6 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { Dialog } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,17 +19,25 @@ import {
 import Image from "next/image";
 import { Models } from "node-appwrite";
 import { actionsDropdownItems } from "@/constants";
-import { set } from "zod";
 import Link from "next/link";
 import { constructDownloadUrl } from "@/lib/utils";
-import { DialogContent } from "@radix-ui/react-dialog";
 
 const ActionDropDown = ({ file }: { file: Models.Document }) => {
   const [isModelOpen, setisModelOpen] = useState(false);
   const [isDropDownOpen, setisDropDownOpen] = useState(false);
   const [action, setAction] = useState<ActionType | null>(null);
   const renderDialodContent = () => {
-    return <DialogContent>Dialog</DialogContent>;
+    return (
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    );
   };
   return (
     <Dialog open={isModelOpen} onOpenChange={() => setisModelOpen}>
@@ -85,6 +100,7 @@ const ActionDropDown = ({ file }: { file: Models.Document }) => {
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
+      {renderDialodContent()}
     </Dialog>
   );
 };
